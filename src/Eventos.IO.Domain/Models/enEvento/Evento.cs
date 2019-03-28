@@ -3,6 +3,8 @@ using Eventos.IO.Domain.Models.enCategoria;
 using Eventos.IO.Domain.Models.enEndereco;
 using Eventos.IO.Domain.Models.enOrganizdor;
 using Eventos.IO.Domain.Models.enTag;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 
@@ -39,6 +41,68 @@ namespace Eventos.IO.Domain.Models.enEvento
         public ICollection<Tag> Tag { get; set; }
         public Endereco Endereco { get; set; }
         public Organizador Organizador { get; set; }
+        #endregion
+
+        #region Validations
+        public override bool IsValid()
+        {
+            Validar();
+            return ValidationResult.IsValid;
+        }
+
+        private void Validar()
+        {
+            ValidarNome();
+            ValidarValor();
+            ValidarData();
+            ValidarLocal();
+            ValidarNomeEmpresa();
+        }
+
+        private void ValidarNome()
+        {
+            RuleFor(x => x.Nome)
+                .NotEmpty().WithMessage("O campo Nome é obrigatório.")
+                .Length(2, 100).WithMessage("Deve conter no entre 2 e 100 caracteres.");
+        }
+
+        private void ValidarValor()
+        {
+            if (!Gratuito)
+                RuleFor(x => x.Valor)
+                .ExclusiveBetween(1, 50000).When(x => !x.Gratuito)
+                .WithMessage("O valor deve estar entre R$ 1,00 e R$ 50.000,00.");
+            else
+                RuleFor(x => x.Valor)
+                    .ExclusiveBetween(0, 0).When(x => x.Gratuito)
+                    .WithMessage("O valor deve ser R$ 0,00 para um Evento Gratuito.");
+        }
+
+        private void ValidarData()
+        {
+            RuleFor(x => x.DataInicio)
+                .LessThan(DateTime.Now)
+                .WithMessage("A data de início não deve ser menor que a data atual.");
+        }
+
+        private void ValidarLocal()
+        {
+            if (Online)
+                RuleFor(x => x.Endereco)
+                    .Null().When(x => x.Online)
+                    .WithMessage("O Evento não deve possuir um endereço se for Online.");
+            else
+                RuleFor(x => x.Endereco)
+                    .Null().When(x => !x.Online)
+                    .WithMessage("Para um evento presencial, o endereço é obrigatório.");
+        }
+
+        private void ValidarNomeEmpresa()
+        {
+            RuleFor(x => x.NomeDaEmpresa)
+                .NotEmpty().WithMessage("O Nome da Empresa é obrigatório.")
+                .Length(3, 150).WithMessage("O Nome da Empresa deve conter entre 3 e 150 caracteres.");
+        }
         #endregion
     }
 }
