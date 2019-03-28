@@ -1,8 +1,12 @@
 ﻿using Eventos.IO.Domain.Core.Models;
+using Eventos.IO.Domain.Models.enCategoria;
+using Eventos.IO.Domain.Models.enEndereco;
+using Eventos.IO.Domain.Models.enOrganizdor;
+using Eventos.IO.Domain.Models.enTag;
 using System;
 using System.Collections.Generic;
 
-namespace Eventos.IO.Domain.Models
+namespace Eventos.IO.Domain.Models.enEvento
 {
     public class Evento : Entity<Evento>
     {
