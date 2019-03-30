@@ -42,7 +42,7 @@ namespace Eventos.IO.Domain.Core.Models
                 return true;
 
             if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
-                return true;
+                return false;
 
             return a.Equals(b);
         }
