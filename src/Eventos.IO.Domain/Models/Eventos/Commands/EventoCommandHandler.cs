@@ -19,7 +19,7 @@ namespace Eventos.IO.Domain.Models.Eventos.Commands
         private readonly IBus _bus;
 
         public EventoCommandHandler(
-            IUnitOfWork uow, 
+            IUnitOfWork uow,
             IBus bus,
             IEventoRepository eventoRepository,
             IDomainNotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
@@ -30,11 +30,14 @@ namespace Eventos.IO.Domain.Models.Eventos.Commands
 
         public void Handle(RegistrarEventoCommand message)
         {
+            var endereco = new Endereco(message.Id, message.Endereco.Logradouro, message.Endereco.Numero,
+            message.Endereco.Complemento, message.Endereco.Bairro, message.Endereco.CEP, message.Endereco.Cidade,
+            message.Endereco.Estado, message.Id);
+
             var evento = EventoFactory.NovoEventoCompleto(message.Id, message.Nome,
                 message.DescricaoCurta, message.DescricaoLonga, message.DataInicio,
                 message.DataFim, message.Gratuito, message.Valor, message.Online,
-                message.NomeDaEmpresa, message.OrganizadorId, message.Endereco,
-                message.CategoriaId);
+                message.NomeDaEmpresa, message.OrganizadorId, endereco, message.CategoriaId);
 
             if (!EventoValido(evento))
                 return;
@@ -53,17 +56,16 @@ namespace Eventos.IO.Domain.Models.Eventos.Commands
 
         public void Handle(AtualizarEventoCommand message)
         {
+            var eventoAtual = _eventoRepository.GetById(message.Id);
+
             if (!EventoExistente(message.Id, message.MessageType))
                 return;
 
-            // TODO: validar se o evento pertence a pessoa que esta editando
-            //var eventoAtual = ObterEvento()
-
             var evento = EventoFactory.NovoEventoCompleto(message.Id, message.Nome,
-                message.DescricaoCurta, message.DescricaoLonga, message.DataInicio,
-                message.DataFim, message.Gratuito, message.Valor, message.Online,
-                message.NomeDaEmpresa, message.OrganizadorId, message.Endereco,
-                message.CategoriaId);
+                 message.DescricaoCurta, message.DescricaoLonga, message.DataInicio,
+                 message.DataFim, message.Gratuito, message.Valor, message.Online,
+                 message.NomeDaEmpresa, message.OrganizadorId, eventoAtual.Endereco,
+                 message.CategoriaId);
 
             if (!EventoValido(evento))
                 return;
