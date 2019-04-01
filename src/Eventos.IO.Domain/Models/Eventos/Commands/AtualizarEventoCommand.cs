@@ -6,7 +6,8 @@ namespace Eventos.IO.Domain.Models.Eventos.Commands
     {
         public AtualizarEventoCommand(Guid id, string nome, string descricaoCurta,
             string descricaoLonga, DateTime datainicio, DateTime dataFim, bool gratuito,
-            decimal valor, bool online, string nomeDaEmpresa)
+            decimal valor, bool online, string nomeDaEmpresa, Endereco endereco,
+            Guid categoriaId, Guid organizadorId)
         {
             Id = id;
             Nome = nome;
@@ -18,6 +19,9 @@ namespace Eventos.IO.Domain.Models.Eventos.Commands
             Valor = valor;
             Online = online;
             NomeDaEmpresa = nomeDaEmpresa;
+            OrganizadorId = organizadorId;
+            Endereco = endereco;
+            CategoriaId = categoriaId;
         }
     }
 }

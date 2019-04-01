@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Eventos.IO.Domain.Core.Models
 {
@@ -13,8 +14,10 @@ namespace Eventos.IO.Domain.Core.Models
         }
         #endregion
 
-        #region Properts
+        #region Properties
         public Guid Id { get; protected set; }
+
+        [NotMapped] // Para não dar problemas com mapeamento EF
         public ValidationResult ValidationResult { get; protected set; }
         #endregion
 

@@ -26,7 +26,7 @@ namespace Eventos.IO.Domain.Models.Eventos
         private Evento() { }
         #endregion
 
-        #region Properts
+        #region Properties
         public string Nome { get; private set; }
         public string DescricaoCurta { get; private set; }
         public string DescricaoLonga { get; private set; }
@@ -36,10 +36,38 @@ namespace Eventos.IO.Domain.Models.Eventos
         public decimal Valor { get; private set; }
         public bool Online { get; private set; }
         public string NomeDaEmpresa { get; private set; }
-        public Categoria Categoria { get; private set; }
-        public ICollection<Tag> Tag { get; private set; }
-        public Endereco Endereco { get; private set; }
-        public Organizador Organizador { get; private set; }
+        public bool Excluido { get; private set; }
+        public virtual ICollection<Tag> Tags { get; private set; }
+        public Guid? CategoriaId { get; private set; }
+        public Guid? EnderecoId { get; private set; }
+        public Guid OrganizadorId { get; private set; }
+
+        // Propriedades de Navegação - EF
+        public virtual Categoria Categoria { get; private set; }
+        public virtual Endereco Endereco { get; private set; }
+        public virtual Organizador Organizador { get; private set; }
+        #endregion
+
+        #region Methods
+        public void AtribuirEndereco(Endereco endereco)
+        {
+            if (!endereco.IsValid())
+                return;
+            Endereco = endereco;
+        }
+
+        public void AtribuirCategoria(Categoria categoria)
+        {
+            if (!categoria.IsValid())
+                return;
+            Categoria = categoria;
+        }
+
+        public void ExcluirEvento()
+        {
+            // TODO: Validações para exclusão
+            Excluido = true;
+        }
         #endregion
 
         #region Validations
@@ -57,6 +85,9 @@ namespace Eventos.IO.Domain.Models.Eventos
             ValidarLocal();
             ValidarNomeEmpresa();
             ValidationResult = Validate(this);
+
+            //Validações Adicionais - se chamar antes ele sobrescreve as validações acima
+            ValidarEndereco();
         }
 
         private void ValidarNome()
@@ -107,6 +138,16 @@ namespace Eventos.IO.Domain.Models.Eventos
                 .NotEmpty().WithMessage("O Nome da Empresa é obrigatório.")
                 .Length(3, 150).WithMessage("O Nome da Empresa deve conter entre 3 e 150 caracteres.");
         }
+
+        private void ValidarEndereco()
+        {
+            if (Online)
+                return;
+            if (Endereco.IsValid())
+                return;
+            foreach (var error in Endereco.ValidationResult.Errors)
+                ValidationResult.Errors.Add(error);
+        }
         #endregion
 
         #region Factory
@@ -115,7 +156,8 @@ namespace Eventos.IO.Domain.Models.Eventos
             public static Evento NovoEventoCompleto(
                 Guid id, string nome, string descricaoCurta, string descricaoLonga,
                 DateTime dataInicio, DateTime dataFim, bool gratuito, decimal valor,
-                bool online, string nomeDaEmpresa, Guid? organizadorId)
+                bool online, string nomeDaEmpresa, Guid? organizadorId, Endereco endereco, 
+                Guid categoriaId)
             {
                 var evento = new Evento()
                 {
@@ -128,11 +170,16 @@ namespace Eventos.IO.Domain.Models.Eventos
                     Gratuito = gratuito,
                     Valor = valor,
                     Online = online,
-                    NomeDaEmpresa = nomeDaEmpresa
-                };
+                    NomeDaEmpresa = nomeDaEmpresa,
+                    Endereco = endereco,
+                    CategoriaId = categoriaId,
+            };
 
-                if (organizadorId != null)
-                    evento.Organizador = new Organizador(organizadorId.Value);
+                if (organizadorId.HasValue)
+                    evento.OrganizadorId = organizadorId.Value;
+
+                if (online)
+                    evento.Endereco = null;
 
                 return evento;
             }

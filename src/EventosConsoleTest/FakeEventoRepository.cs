@@ -13,6 +13,16 @@ namespace EventosConsoleTest
             //
         }
 
+        public void AdicionarEndereco(Endereco endereco)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AtualizarEndereco(Endereco endereco)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Dispose()
         {
             //
@@ -31,6 +41,16 @@ namespace EventosConsoleTest
         public Evento GetById(Guid id)
         {
             return new Evento("Fake", DateTime.Now, DateTime.Now, true, 0, true, "Empresa");
+        }
+
+        public Endereco ObterEnderecoPorId(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Evento> ObterEventoPorOrganizador(Guid organizadorId)
+        {
+            throw new NotImplementedException();
         }
 
         public void Remove(Guid id)

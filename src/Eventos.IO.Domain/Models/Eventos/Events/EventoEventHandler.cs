@@ -1,5 +1,4 @@
 ﻿using Eventos.IO.Domain.Core.Events;
-using Eventos.IO.Domain.Models.Eventos.Events;
 using System;
 
 namespace Eventos.IO.Domain.Models.Eventos.Events

@@ -2,11 +2,7 @@
 
 namespace Eventos.IO.Domain.Models.Eventos
 {
-    public class Tag : Entity<Tag>
+    public class Tag
     {
-        public override bool IsValid()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

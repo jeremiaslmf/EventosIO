@@ -2,7 +2,6 @@
 using Eventos.IO.Domain.Core.Notifications;
 using Eventos.IO.Domain.Interfaces;
 using FluentValidation.Results;
-using System;
 
 namespace Eventos.IO.Domain.CommandHandlers
 {
@@ -25,10 +24,8 @@ namespace Eventos.IO.Domain.CommandHandlers
         protected void NotificarValidacoesErro(ValidationResult validationResult)
         {
             foreach (var error in validationResult.Errors)
-            {
                 _bus.RaiseEvent(
                     new DomainNotification(error.PropertyName, error.ErrorMessage));
-            }
         }
 
         protected bool Commit()
@@ -38,11 +35,8 @@ namespace Eventos.IO.Domain.CommandHandlers
 
             var commandResponse = _uow.Commit();
             if (!commandResponse.Success)
-            {
-                Console.WriteLine("Ocorreu um erro ao salvar os dados.");
                 _bus.RaiseEvent(
                     new DomainNotification("Commit", "Ocorreu um erro ao salvar os dados."));
-            }
 
             return commandResponse.Success;
         }

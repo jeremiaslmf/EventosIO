@@ -6,7 +6,6 @@ using Eventos.IO.Domain.Core.Notifications;
 using Eventos.IO.Domain.Models.Eventos.Commands;
 using Eventos.IO.Domain.Models.Eventos.Events;
 using System;
-using System.Drawing;
 
 namespace EventosConsoleTest
 {

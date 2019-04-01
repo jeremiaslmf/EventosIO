@@ -1,7 +1,5 @@
-﻿using Eventos.IO.Domain.Core.Bus;
-using Eventos.IO.Domain.Core.Commands;
-using Eventos.IO.Domain.Core.Events;
-using Eventos.IO.Domain.Core.Notifications;
+﻿using Eventos.IO.Domain.Core.Events;
+using Eventos.IO.Domain.Models.Eventos;
 using Eventos.IO.Domain.Models.Eventos.Commands;
 using System;
 
@@ -12,22 +10,24 @@ namespace EventosConsoleTest
         static void Main(string[] args)
         {
             var bus = new FakeBus();
-            
+            var endereco = new Endereco(Guid.NewGuid(), "Logra", "1", "Compl", "Bairro", "Cep", "Cidade", "Estado", Guid.NewGuid());
+
             // Registro com sucesso
             var cmd = new RegistrarEventoCommand("DevX", DateTime.Now.AddDays(1), DateTime.Now.AddDays(2),
-                true, 0m, true, "Empresa EVENTO SA");
+                true, 0m, true, "Empresa EVENTO SA", endereco, Guid.NewGuid(), Guid.NewGuid());
             Inicio(cmd);
             bus.SendCommand(cmd);
             Fim(cmd);
 
             // Registro com erros
-            cmd = new RegistrarEventoCommand("", DateTime.Now.AddDays(2), DateTime.Now.AddDays(1), false, 0, false, "");
+            
+            cmd = new RegistrarEventoCommand("", DateTime.Now.AddDays(2), DateTime.Now.AddDays(1), false, 0, false, "", endereco, Guid.NewGuid(), Guid.NewGuid());
             Inicio(cmd);
             bus.SendCommand(cmd);
             Fim(cmd);
 
             // Atualizar Evento
-            var cmd2 = new AtualizarEventoCommand(Guid.NewGuid(), "DevX", "", "", DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), false, 50, true, "Empresa");
+            var cmd2 = new AtualizarEventoCommand(Guid.NewGuid(), "DevX", "", "", DateTime.Now.AddDays(1), DateTime.Now.AddDays(2), false, 50, true, "Empresa", endereco, Guid.NewGuid(), Guid.NewGuid());
             Inicio(cmd2);
             bus.SendCommand(cmd2);
             Fim(cmd2);
