@@ -41,6 +41,8 @@ namespace Eventos.IO.Application.ViewModels
         public bool Gratuito { get; set; }
 
         [Display(Name = "Valor do Evento")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        [DataType(DataType.Currency, ErrorMessage = "Moeda em formato inválido")]
         public decimal Valor { get; set; }
 
         [Display(Name = "Será Online")]

@@ -6,7 +6,7 @@ namespace Eventos.IO.Domain.Models.Eventos.Commands
     public class IncluirEnderecoEventoCommand : Command
     {
         public IncluirEnderecoEventoCommand(Guid id, string logradouro, string numero, string complemento, 
-            string bairro, string cep, string cidade, string estado, Guid eventoId)
+            string bairro, string cep, string cidade, string estado, Guid? eventoId)
         {
             Id = id;
             Logradouro = logradouro;

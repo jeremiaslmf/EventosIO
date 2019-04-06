@@ -1,24 +1,31 @@
 ﻿using Eventos.IO.Application.Interfaces;
 using Eventos.IO.Application.ViewModels;
+using Eventos.IO.Domain.Core.Notifications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Eventos.IO.Site.Controllers
 {
+    [Route("")]
     public class EventosController : Controller
     {
         private readonly IEventoAppService _eventoAppService;
 
-        public EventosController(IEventoAppService eventoAppService)
+        public EventosController(IEventoAppService eventoAppService,
+                                 IDomainNotificationHandler<DomainNotification> notifications)
         {
             _eventoAppService = eventoAppService;
         }
 
+        [Route("")]
+        [Route("proximos-eventos")]
         public IActionResult Index()
         {
             return View(_eventoAppService.ObterTodos());
         }
 
+        [Route("dados-do-evento/{id:guid}")]
         public IActionResult Details(Guid? id)
         {
             if (id == null)
@@ -31,6 +38,8 @@ namespace Eventos.IO.Site.Controllers
             return View(eventoViewModel);
         }
 
+        [Route("novo-evento")]
+        [Authorize(Policy = "PodeGravar")]
         public IActionResult Create()
         {
             return View();
@@ -38,6 +47,8 @@ namespace Eventos.IO.Site.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("novo-evento")]
+        [Authorize(Policy = "PodeGravar")]
         public IActionResult Create(EventoViewModel eventoViewModel)
         {
             if (!ModelState.IsValid)
