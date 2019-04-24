@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Eventos.IO.Site.Models;
 using Microsoft.AspNetCore.Mvc;
-using Eventos.IO.Site.Models;
+using System.Diagnostics;
 
 namespace Eventos.IO.Site.Controllers
 {
+    [Route("home")]
     public class HomeController : Controller
     {
+        [Route("welcome")]
+        [Route("")]
+        [Route("/")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [Route("error")]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

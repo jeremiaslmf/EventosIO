@@ -111,13 +111,13 @@ namespace Eventos.IO.Domain.Models.Eventos
 
         private void ValidarData()
         {
-            RuleFor(x => x.DataInicio)
-                .LessThan(x => x.DataFim)
+            RuleFor(x => x.DataInicio.Date)
+                .LessThan(x => x.DataFim.Date)
                 .WithMessage("A data de início não deve ser maior que a data final do evento.");
 
-            RuleFor(x => x.DataInicio)
-                .GreaterThan(DateTime.Now)
-                .WithMessage("A Data de Início não deve ser maior que a data atual.");
+            RuleFor(x => x.DataInicio.Date)
+                .GreaterThan(DateTime.Now.Date)
+                .WithMessage("A data de Início não deve ser menor que a data atual.");
         }
 
         private void ValidarLocal()

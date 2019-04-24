@@ -34,40 +34,40 @@ namespace Eventos.IO.Application.AutoMapper
                         c.Endereco.Estado,
                         c.Endereco.Id)));
 
-            //CreateMap<EnderecoViewModel, IncluirEnderecoEventoCommand>()
-            //   .ConstructUsing(c => new IncluirEnderecoEventoCommand(
-            //       Guid.NewGuid(), 
-            //       c.Logradouro, 
-            //       c.Numero, 
-            //       c.Complemento, 
-            //       c.Bairro, 
-            //       c.CEP, 
-            //       c.Cidade, 
-            //       c.Estado, 
-            //       c.EventoId));
+            CreateMap<EnderecoViewModel, IncluirEnderecoEventoCommand>()
+               .ConstructUsing(c => new IncluirEnderecoEventoCommand(
+                   Guid.NewGuid(),
+                   c.Logradouro,
+                   c.Numero,
+                   c.Complemento,
+                   c.Bairro,
+                   c.CEP,
+                   c.Cidade,
+                   c.Estado,
+                   c.EventoId));
 
-            //#endregion
+            #endregion
 
-            //#region Atualizar
-            //CreateMap<EventoViewModel, AtualizarEventoCommand>()
-            //    .ConstructUsing(c => new AtualizarEventoCommand(
-            //        c.Id,
-            //        c.Nome,
-            //        c.DescricaoCurta,
-            //        c.DescricaoLonga,
-            //        c.DataInicio,
-            //        c.DataFim,
-            //        c.Gratuito,
-            //        c.Valor,
-            //        c.Online,
-            //        c.NomeDaEmpresa,
-            //        c.CategoriaId,
-            //        c.OrganizadorId));
-            //#endregion
+            #region Atualizar
+            CreateMap<EventoViewModel, AtualizarEventoCommand>()
+                .ConstructUsing(c => new AtualizarEventoCommand(
+                    c.Id,
+                    c.Nome,
+                    c.DescricaoCurta,
+                    c.DescricaoLonga,
+                    c.DataInicio,
+                    c.DataFim,
+                    c.Gratuito,
+                    c.Valor,
+                    c.Online,
+                    c.NomeDaEmpresa,
+                    c.CategoriaId,
+                    c.OrganizadorId));
+            #endregion
 
-            //#region Excluir
-            //CreateMap<EventoViewModel, ExcluirEventoCommand>()
-            //    .ConstructUsing(c => new ExcluirEventoCommand(c.Id));
+            #region Excluir
+            CreateMap<EventoViewModel, ExcluirEventoCommand>()
+                .ConstructUsing(c => new ExcluirEventoCommand(c.Id));
             #endregion
         }
     }

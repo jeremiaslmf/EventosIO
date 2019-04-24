@@ -26,8 +26,9 @@ namespace Eventos.IO.Infrastructure.CrossCutting.IoC
             #endregion
 
             #region Application
-            services.AddSingleton(Mapper.Configuration);
-            services.AddScoped<IMapper>(m => new Mapper(m.GetRequiredService<IConfigurationProvider>(), m.GetService));
+            //services.AddSingleton(Mapper.Configuration);
+            //services.AddScoped<IMapper>(m => new Mapper(m.GetRequiredService<IConfigurationProvider>(), m.GetService));
+            //services.AddScoped<IEventoAppService, EventoAppService>();
             services.AddScoped<IEventoAppService, EventoAppService>();
             #endregion
 

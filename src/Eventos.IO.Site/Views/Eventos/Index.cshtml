@@ -1,55 +1,33 @@
 ﻿@model IEnumerable<Eventos.IO.Application.ViewModels.EventoViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Eventos";
 }
 
-<h1>Index</h1>
+<h1>Lista de Eventos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Evento</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescricaoCurta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescricaoLonga)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gratuito)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Valor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Online)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeDaEmpresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrganizadorId)
-            </th>
+            <th>Nome</th>
+            <th>Descricão Curta</th>
+            <th>Descricão Longa</th>
+            <th>Dt. Início</th>
+            <th>Dt. Fim</th>
+            <th>Gratuito?</th>
+            <th>R$ Valor</th>
+            <th>Online?</th>
+            <th>Empresa</th>
+            <th>Categoria</th>
+            <th>OrganizadorId</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
@@ -85,9 +63,9 @@
                 @Html.DisplayFor(modelItem => item.OrganizadorId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhe</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Remover</a>
             </td>
         </tr>
 }

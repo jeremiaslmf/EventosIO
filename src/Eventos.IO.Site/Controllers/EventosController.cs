@@ -1,27 +1,30 @@
-﻿using Eventos.IO.Application.Interfaces;
+﻿using AutoMapper;
+using Eventos.IO.Application.AutoMapper;
+using Eventos.IO.Application.Interfaces;
 using Eventos.IO.Application.ViewModels;
 using Eventos.IO.Domain.Core.Notifications;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Eventos.IO.Site.Controllers
 {
-    [Route("")]
     public class EventosController : Controller
     {
         private readonly IEventoAppService _eventoAppService;
+        private readonly IMapper _mapper;
 
         public EventosController(IEventoAppService eventoAppService,
-                                 IDomainNotificationHandler<DomainNotification> notifications)
+                                 IDomainNotificationHandler<DomainNotification> notifications,
+                                 IMapper mapper)
         {
             _eventoAppService = eventoAppService;
+            _mapper = mapper;
         }
 
-        [Route("")]
-        [Route("proximos-eventos")]
+        [Route("eventos")]
         public IActionResult Index()
         {
+            var view = _mapper.Map(new DomainToViewModelMappingProfile(),  new ViewModelToDomainMappingProfile());
             return View(_eventoAppService.ObterTodos());
         }
 
@@ -39,7 +42,7 @@ namespace Eventos.IO.Site.Controllers
         }
 
         [Route("novo-evento")]
-        [Authorize(Policy = "PodeGravar")]
+        //[Authorize(Policy = "PodeGravar")]
         public IActionResult Create()
         {
             return View();
@@ -48,7 +51,7 @@ namespace Eventos.IO.Site.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-evento")]
-        [Authorize(Policy = "PodeGravar")]
+        //[Authorize(Policy = "PodeGravar")]
         public IActionResult Create(EventoViewModel eventoViewModel)
         {
             if (!ModelState.IsValid)
@@ -59,6 +62,7 @@ namespace Eventos.IO.Site.Controllers
             return View(eventoViewModel);
         }
 
+        [Route("eventos/edit/{id:guid}")]
         public IActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -73,6 +77,7 @@ namespace Eventos.IO.Site.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("eventos/edit/{id:guid}")]
         public IActionResult Edit(EventoViewModel eventoViewModel)
         {
             if (!ModelState.IsValid)
@@ -98,6 +103,7 @@ namespace Eventos.IO.Site.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("eventos/remove/{id:guid}")]
         public IActionResult DeleteConfirmed(Guid id)
         {
             _eventoAppService.Excluir(id);

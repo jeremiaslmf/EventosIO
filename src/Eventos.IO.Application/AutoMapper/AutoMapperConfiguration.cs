@@ -6,10 +6,10 @@ namespace Eventos.IO.Application.AutoMapper
     {
         public static MapperConfiguration RegisterMappings()
         {
-            return new MapperConfiguration(ps =>
+            return new MapperConfiguration(cfg =>
             {
-                ps.AddProfile(new DomainToViewModelMappingProfile());
-                ps.AddProfile(new ViewModelToDomainMappingProfile());
+                cfg.AddProfile<DomainToViewModelMappingProfile>();
+                cfg.AddProfile<ViewModelToDomainMappingProfile>();
             });
         }
     }

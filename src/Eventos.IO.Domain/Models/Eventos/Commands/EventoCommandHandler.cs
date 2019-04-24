@@ -94,9 +94,10 @@ namespace Eventos.IO.Domain.Models.Eventos.Commands
 
         private bool EventoValido(Evento evento)
         {
-            if (!evento.IsValid())
+            var isValido = evento.IsValid();
+            if (!isValido)
                 NotificarValidacoesErro(evento.ValidationResult);
-            return evento.IsValid();
+            return isValido;
         }
 
         private bool EventoExistente(Guid id, string messageType)

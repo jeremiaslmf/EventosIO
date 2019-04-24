@@ -1,12 +1,12 @@
 ﻿@model Eventos.IO.Application.ViewModels.EventoViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edição";
 }
 
-<h1>Edit</h1>
+<h1>Edição</h1>
 
-<h4>EventoViewModel</h4>
+<h4>Evento</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,8 +25,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="DescricaoLonga" class="control-label"></label>
-                <input asp-for="DescricaoLonga" class="form-control" />
+                <textarea asp-for="DescricaoLonga" class="form-control"></textarea>
                 <span asp-validation-for="DescricaoLonga" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categoria" class="control-label"></label>
+                <div>
+                    <partial name="_Categorias" />
+                    <span asp-validation-for="Categoria" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="DataInicio" class="control-label"></label>
@@ -59,24 +66,14 @@
                 <span asp-validation-for="NomeDaEmpresa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CategoriaId" class="control-label"></label>
-                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
-                <span asp-validation-for="CategoriaId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrganizadorId" class="control-label"></label>
-                <input asp-for="OrganizadorId" class="form-control" />
-                <span asp-validation-for="OrganizadorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para a lista</a>
 </div>
 
 @section Scripts {
