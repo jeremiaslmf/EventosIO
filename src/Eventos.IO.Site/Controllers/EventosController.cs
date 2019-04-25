@@ -8,23 +8,19 @@ using System;
 
 namespace Eventos.IO.Site.Controllers
 {
-    public class EventosController : Controller
+    public class EventosController : BaseController
     {
         private readonly IEventoAppService _eventoAppService;
-        private readonly IMapper _mapper;
 
         public EventosController(IEventoAppService eventoAppService,
-                                 IDomainNotificationHandler<DomainNotification> notifications,
-                                 IMapper mapper)
+                                 IDomainNotificationHandler<DomainNotification> notifications) : base (notifications)
         {
             _eventoAppService = eventoAppService;
-            _mapper = mapper;
         }
 
         [Route("eventos")]
         public IActionResult Index()
         {
-            var view = _mapper.Map(new DomainToViewModelMappingProfile(),  new ViewModelToDomainMappingProfile());
             return View(_eventoAppService.ObterTodos());
         }
 
@@ -58,6 +54,12 @@ namespace Eventos.IO.Site.Controllers
                 return View(eventoViewModel);
 
             _eventoAppService.Registrar(eventoViewModel);
+
+            var mensagemRetorno = OperacaoValida() 
+                ? "sucess,Evento registrado com sucesso!"
+                : "error,Evento nao registrado. Verifique!";
+
+            ViewBag.RetornoPost = mensagemRetorno;
 
             return View(eventoViewModel);
         }

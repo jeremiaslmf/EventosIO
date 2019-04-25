@@ -6,49 +6,57 @@
 
 <h1>Lista de Eventos</h1>
 
-<p>
-    <a asp-action="Create">Criar Evento</a>
-</p>
+<div>
+    <div class="coll-md-12">
+        <div class="pull-left">
+            <a asp-action="Create" class="btn btn-primary">
+                <span title="Novo Evento" class="fas fa-plus"></span> Novo
+            </a>
+        </div>
+    </div>
+</div>
+<br/>
 <table class="table">
     <thead>
         <tr>
             <th>Nome</th>
             <th>Dt. Início</th>
             <th>Dt. Fim</th>
-            <th>R$ Valor</th>
+            <th>Valor R$</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFim)
-            </td>
-            <td>
-                @{
-                    if (item.Gratuito)
-                    {
-                       @Html.DisplayName("Gratuito")
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataFim)
+                </td>
+                <td>
+                    @{
+                        if (item.Gratuito)
+                        {
+                            @Html.DisplayName("Gratuito")
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Valor)
+                        }
                     }
-                    else
-                    {
-                       @Html.DisplayFor(modelItem => item.Valor)
-                    }
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Editar</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Detalhe</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Remover</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary fas fa-edit fa-1x"></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary fas fa-info-circle fa-1x"></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger fas fa-trash fa-1x"></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

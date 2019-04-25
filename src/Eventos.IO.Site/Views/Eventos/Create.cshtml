@@ -1,17 +1,20 @@
 ﻿@model Eventos.IO.Application.ViewModels.EventoViewModel
 
 @{
-    ViewData["Title"] = "Cadastro";
+    ViewData["Title"] = "Registro de Evento";
 }
 
 <h1>Cadastro</h1>
-
 <h4>Evento</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <vc:summary />
+
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
@@ -31,7 +34,7 @@
             <div class="form-group">
                 <label asp-for="Categoria" class="control-label"></label>
                 <div>
-                    <partial name="_Categorias"/>
+                    <partial name="_Categorias" />
                     <span asp-validation-for="Categoria" class="text-danger"></span>
                 </div>
             </div>
@@ -67,16 +70,39 @@
                 <span asp-validation-for="NomeDaEmpresa" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-primary">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Voltar para a lista</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @{ if (ViewBag.RetornoPost != null)
+        {
+            var notificacao = ViewBag.RetornoPost.ToString().Split(',');
+            <script>
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["@notificacao[0]"]("@notificacao[1]");
+            </script>
+        }
+    }
 }
