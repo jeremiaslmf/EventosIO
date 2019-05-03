@@ -12,10 +12,13 @@ using Eventos.IO.Domain.Models.Organizadores.Commands;
 using Eventos.IO.Domain.Models.Organizadores.Events;
 using Eventos.IO.Domain.Models.Organizadores.Repository;
 using Eventos.IO.Infrastructure.CrossCutting.Bus;
+using Eventos.IO.Infrastructure.CrossCutting.Identity.Data;
 using Eventos.IO.Infrastructure.Data.Context;
 using Eventos.IO.Infrastructure.Data.Repository;
 using Eventos.IO.Infrastructure.Data.UoW;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Eventos.IO.Infrastructure.CrossCutting.IoC
@@ -56,6 +59,11 @@ namespace Eventos.IO.Infrastructure.CrossCutting.IoC
             services.AddScoped<EventosContext>();
             // Bus
             services.AddScoped<IBus, InMemoryBus>();
+            // Identity
+            services.AddDefaultIdentity<IdentityUser>()
+               .AddDefaultUI(UIFramework.Bootstrap4)
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultTokenProviders();
             #endregion
         }
     }

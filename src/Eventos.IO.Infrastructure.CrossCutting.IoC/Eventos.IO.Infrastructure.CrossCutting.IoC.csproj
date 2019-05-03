@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Eventos.IO.Infrastructure.CrossCutting.Identity\Eventos.IO.Infrastructure.CrossCutting.Identity.csproj" />
     <ProjectReference Include="..\Eventos.IO.Application\Eventos.IO.Application.csproj" />
     <ProjectReference Include="..\Eventos.IO.Domain\Eventos.IO.Domain.csproj" />
     <ProjectReference Include="..\Eventos.IO.Infrastructure.CrossCutting.Bus\Eventos.IO.Infrastructure.CrossCutting.Bus.csproj" />
@@ -16,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Identity.UI">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.identity.ui\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Identity.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>

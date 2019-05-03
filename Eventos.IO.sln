@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{646D5DCF-96B5-4CA4-BD0A-EBA81A9837C3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Services", "3 - Services", "{FEDCE34D-4298-4EA5-ABE8-342407CD051E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Services", "2 - Services", "{FEDCE34D-4298-4EA5-ABE8-342407CD051E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", "{790C2136-021E-4E20-8A3D-893AFD91E6A0}"
 EndProject
@@ -25,13 +25,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventos.IO.Infrastructure.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventos.IO.Site", "src\Eventos.IO.Site\Eventos.IO.Site.csproj", "{D67B3DEE-120E-448B-B321-6292CF9DDA0C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{F7DD843E-B8B8-4FB6-83C1-D256CDFD643D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Application", "3 - Application", "{F7DD843E-B8B8-4FB6-83C1-D256CDFD643D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventos.IO.Application", "src\Eventos.IO.Application\Eventos.IO.Application.csproj", "{9AD4014C-7FA0-4428-96A1-1B13AF49D661}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventos.IO.Infrastructure.CrossCutting.IoC", "src\Eventos.IO.Infrastructure.CrossCutting.IoC\Eventos.IO.Infrastructure.CrossCutting.IoC.csproj", "{83498B50-31F9-4F89-A1B1-BBA4F7C9BF4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventos.IO.Infrastructure.CrossCutting.Bus", "src\Eventos.IO.Infrastructure.CrossCutting.Bus\Eventos.IO.Infrastructure.CrossCutting.Bus.csproj", "{08526165-5A37-4A70-8351-50D7ADACBDA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventos.IO.Infrastructure.CrossCutting.Bus", "src\Eventos.IO.Infrastructure.CrossCutting.Bus\Eventos.IO.Infrastructure.CrossCutting.Bus.csproj", "{08526165-5A37-4A70-8351-50D7ADACBDA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventos.IO.Infrastructure.CrossCutting.Identity", "Eventos.IO.Infrastructure.CrossCutting.Identity\Eventos.IO.Infrastructure.CrossCutting.Identity.csproj", "{9B5DCF67-9C52-4737-AA4C-26C8B776846E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{08526165-5A37-4A70-8351-50D7ADACBDA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08526165-5A37-4A70-8351-50D7ADACBDA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08526165-5A37-4A70-8351-50D7ADACBDA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5DCF67-9C52-4737-AA4C-26C8B776846E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5DCF67-9C52-4737-AA4C-26C8B776846E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5DCF67-9C52-4737-AA4C-26C8B776846E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5DCF67-9C52-4737-AA4C-26C8B776846E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{9AD4014C-7FA0-4428-96A1-1B13AF49D661} = {F7DD843E-B8B8-4FB6-83C1-D256CDFD643D}
 		{83498B50-31F9-4F89-A1B1-BBA4F7C9BF4C} = {06521FC1-EAD1-47A2-8DC8-85F9A0C3AC90}
 		{08526165-5A37-4A70-8351-50D7ADACBDA2} = {06521FC1-EAD1-47A2-8DC8-85F9A0C3AC90}
+		{9B5DCF67-9C52-4737-AA4C-26C8B776846E} = {06521FC1-EAD1-47A2-8DC8-85F9A0C3AC90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE8F8A8F-A329-42B5-8DF5-A76E6D7A1EFF}

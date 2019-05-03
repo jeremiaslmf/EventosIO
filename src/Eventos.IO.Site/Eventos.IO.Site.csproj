@@ -16,6 +16,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Eventos.IO.Infrastructure.CrossCutting.Identity\Eventos.IO.Infrastructure.CrossCutting.Identity.csproj" />
     <ProjectReference Include="..\Eventos.IO.Application\Eventos.IO.Application.csproj" />
     <ProjectReference Include="..\Eventos.IO.Infrastructure.CrossCutting.Bus\Eventos.IO.Infrastructure.CrossCutting.Bus.csproj" />
     <ProjectReference Include="..\Eventos.IO.Infrastructure.CrossCutting.IoC\Eventos.IO.Infrastructure.CrossCutting.IoC.csproj" />

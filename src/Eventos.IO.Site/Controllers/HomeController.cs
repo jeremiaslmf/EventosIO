@@ -1,4 +1,4 @@
-﻿using Eventos.IO.Site.Models;
+﻿using Eventos.IO.Infrastructure.CrossCutting.Identity.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

@@ -1,6 +1,4 @@
-using System;
-
-namespace Eventos.IO.Site.Models
+namespace Eventos.IO.Infrastructure.CrossCutting.Identity.Models
 {
     public class ErrorViewModel
     {

@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Eventos.IO.Application.AutoMapper;
-using Eventos.IO.Infrastructure.CrossCutting.Bus;
+﻿using Eventos.IO.Infrastructure.CrossCutting.Bus;
+using Eventos.IO.Infrastructure.CrossCutting.Identity.Data;
 using Eventos.IO.Infrastructure.CrossCutting.IoC;
 using Eventos.IO.Presentation.AutoMapper;
-using Eventos.IO.Site.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Eventos.IO.Site
 {
@@ -39,11 +36,7 @@ namespace Eventos.IO.Site
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
+       
             services.AddAutoMapperSetup();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
