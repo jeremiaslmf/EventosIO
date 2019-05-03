@@ -7,7 +7,6 @@ namespace Eventos.IO.Domain.Models.Organizadores
 {
     public class Organizador : Entity<Organizador>
     {
-
         #region Constructors
         public Organizador(Guid id, string nome, string cpf, string email)
         {

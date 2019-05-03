@@ -8,6 +8,9 @@ using Eventos.IO.Domain.Interfaces;
 using Eventos.IO.Domain.Models.Eventos.Commands;
 using Eventos.IO.Domain.Models.Eventos.Events;
 using Eventos.IO.Domain.Models.Eventos.Repository;
+using Eventos.IO.Domain.Models.Organizadores.Commands;
+using Eventos.IO.Domain.Models.Organizadores.Events;
+using Eventos.IO.Domain.Models.Organizadores.Repository;
 using Eventos.IO.Infrastructure.CrossCutting.Bus;
 using Eventos.IO.Infrastructure.Data.Context;
 using Eventos.IO.Infrastructure.Data.Repository;
@@ -26,10 +29,8 @@ namespace Eventos.IO.Infrastructure.CrossCutting.IoC
             #endregion
 
             #region Application
-            //services.AddSingleton(Mapper.Configuration);
-            //services.AddScoped<IMapper>(m => new Mapper(m.GetRequiredService<IConfigurationProvider>(), m.GetService));
-            //services.AddScoped<IEventoAppService, EventoAppService>();
             services.AddScoped<IEventoAppService, EventoAppService>();
+            services.AddScoped<IOrganizadorAppService, OrganizadorAppService>();
             #endregion
 
             #region Domain
@@ -37,16 +38,20 @@ namespace Eventos.IO.Infrastructure.CrossCutting.IoC
             services.AddScoped<IHandler<RegistrarEventoCommand>, EventoCommandHandler>();
             services.AddScoped<IHandler<AtualizarEventoCommand>, EventoCommandHandler>();
             services.AddScoped<IHandler<ExcluirEventoCommand>, EventoCommandHandler>();
+            services.AddScoped<IHandler<RegistrarOrganizadorCommand>, OrganizadorCommandHandler>();
             // Events
             services.AddScoped<IDomainNotificationHandler<DomainNotification>, DomainNotificationHandler>();
             services.AddScoped<IHandler<EventoRegistradoEvent>, EventoEventHandler>();
             services.AddScoped<IHandler<EventoAtualizadoEvent>, EventoEventHandler>();
             services.AddScoped<IHandler<EventoExcluidoEvent>, EventoEventHandler>();
+            //Organizador
+            services.AddScoped<IHandler<OrganizadorRegistradoEvent>, OrganizadorEventHandler>();
             #endregion
 
             #region Infrastructure
             // Data
             services.AddScoped<IEventoRepository, EventoRepository>();
+            services.AddScoped<IOrganizadorRepository, OrganizadorRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<EventosContext>();
             // Bus

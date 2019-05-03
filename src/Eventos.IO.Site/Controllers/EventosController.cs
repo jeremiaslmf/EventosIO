@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Eventos.IO.Application.AutoMapper;
-using Eventos.IO.Application.Interfaces;
+﻿using Eventos.IO.Application.Interfaces;
 using Eventos.IO.Application.ViewModels;
 using Eventos.IO.Domain.Core.Notifications;
 using Microsoft.AspNetCore.Mvc;
@@ -56,7 +54,7 @@ namespace Eventos.IO.Site.Controllers
             _eventoAppService.Registrar(eventoViewModel);
 
             var mensagemRetorno = OperacaoValida() 
-                ? "sucess,Evento registrado com sucesso!"
+                ? "success,Evento registrado com sucesso!"
                 : "error,Evento nao registrado. Verifique!";
 
             ViewBag.RetornoPost = mensagemRetorno;
@@ -86,6 +84,12 @@ namespace Eventos.IO.Site.Controllers
                 return View(eventoViewModel);
 
             _eventoAppService.Atualizar(eventoViewModel);
+
+            var mensagemRetorno = OperacaoValida()
+                ? "success,Dados atualizados com sucesso!"
+                : "error,Não foi possível atulizar os dados do Evento. Verifique!";
+
+            ViewBag.RetornoPost = mensagemRetorno;
 
             return View(eventoViewModel);
         }

@@ -19,11 +19,14 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IEventoAppService.cs" />
+    <Compile Include="Interfaces\IOrganizadorAppService.cs" />
     <Compile Include="Services\EventoAppService.cs" />
+    <Compile Include="Services\OrganizadorAppService.cs" />
     <Compile Include="ViewModels\CategoriaViewModel.cs" />
     <Compile Include="ViewModels\EnderecoViewModel.cs" />
     <Compile Include="ViewModels\EstadoViewModel.cs" />
     <Compile Include="ViewModels\EventoViewModel.cs" />
+    <Compile Include="ViewModels\OrganizadorViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
