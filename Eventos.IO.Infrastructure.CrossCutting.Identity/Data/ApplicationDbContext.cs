@@ -19,7 +19,7 @@ namespace Eventos.IO.Infrastructure.CrossCutting.Identity.Data
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnectionString"));
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
     }
 }
